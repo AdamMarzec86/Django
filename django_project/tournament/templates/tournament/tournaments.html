@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% for tournament in tournaments %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ tournament.author.profile.image.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ tournament.author.first_name  }} {{ tournament.author.last_name }}</a>
+            <small class="text-muted">{{ tournament.date_posted|date:"d E, Y" }}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'tournament-detail' tournament.id %}">{{ tournament.title }}, {{ tournament.time_start }} {{ tournament.date_start|date:"d E, Y" }}</a></h2>
+    </div>
+</article>
+{% endfor %}
+{% endblock content %}

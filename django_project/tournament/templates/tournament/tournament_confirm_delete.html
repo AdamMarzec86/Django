@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Usuń Turniej</legend>
+                    <h2>Czy napewno chcesz usunąć turniej "{{ object.title }}</h2>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger" type="submit">Usuń</button>
+                    <a class="btn btn-outline-secondary" href="{% url 'tournament-detail' object.id %}">Powrót</a>
+                </div>
+            </form>
+        </div>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ tournament.author.first_name  }} {{ tournament.author.last_name }}</a>
+            <small class="text-muted">{{ object.date_start|date:"d E, Y" }}</small>
+            {% if object.author == user %}
+              <div>
+                <a class="btn btn-secondary btm-sm mt-1 mb-1" href="{% url 'tournament-update' object.id %}">Edytuj</a>
+                <a class="btn btn-danger btm-sm mt-1 mb-1" href="{% url 'tournament-delete' object.id %}">Usuń</a>
+              </div>
+            {% endif %}
+        </div>
+        <h2 class="tournament-title">{{ object.title }}</h2>
+        <p class="tournament-area">{{ object.area }}</p>
+        <p class="tournament-start">{{ object.date_start|date:"d E, Y" }} {{ object.time_start }}</p>
+        <p class="tournament-content">{{ object.content }}</p>
+        <div class="border-top pt-3">
+                <small class="text-muted">
+                    Data dodania: <p class="tournament-start">{{ object.date_posted|date:"d E, Y" }}</p>
+                </small>
+        </div>
+    </div>
+    <div class="col-md-4">
+            <div class="content-section">
+                <h3>Tabela podium</h3>
+                <ul class="list-group">
+                <li class="list-group-item list-group-item-light">1. {{ object.first_place }}</li>
+                <li class="list-group-item list-group-item-light">2. {{ object.second_place }}</li>
+                <li class="list-group-item list-group-item-light">3. {{ object.third_place }}</li>
+                </ul>
+            </div>
+        </div>
+</article>
+{% endblock content %}
